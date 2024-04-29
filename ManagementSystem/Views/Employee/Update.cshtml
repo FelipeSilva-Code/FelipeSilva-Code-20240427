@@ -1,0 +1,37 @@
+﻿@model ManagementSystem.Models.ViewModels.EmployeeViewModel
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h1>Alterar</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Update">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label asp-for="IdUnity" class="control-label">Unidades</label>
+                <select asp-for="IdUnity" class="form-control" asp-items="@(new SelectList(Model.AllUnities,"Id",
+                "Name", Model.IdUnity))"></select>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<div>
+    <a asp-action="Index">Voltar</a>
+</div>
+

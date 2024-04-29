@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ManagementSystem.Models.ViewModels.UnityViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Unidades</h1>
+
+<p>
+    <a asp-action="Create">Adicionar Unidade</a>
+</p>
+
+@foreach (var item in Model)
+{
+    <br />
+
+    <h2>@item.Code - @item.Name</h2>
+
+    if(item.Employees.Count <= 0)
+    {
+        <h5>Não há colaboradores cadastrados nessa unidade</h5>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Código do Colaborador
+                    </th>
+                    <th>
+                        Nome do Colaborador
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var colaborador in item.Employees)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => colaborador.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => colaborador.Id)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    
+}
+
+

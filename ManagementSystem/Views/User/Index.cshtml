@@ -1,0 +1,60 @@
+﻿@model IEnumerable<ManagementSystem.Models.ViewModels.UserViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Usuários</h1>
+
+<p>
+    <a asp-action="Create">Adicionar Usuário</a>
+</p>
+
+@using (Html.BeginForm("Index", "User", FormMethod.Get))
+{
+    <label>
+        <input type="radio" name="Status" value="null" checked /> Todos
+    </label>
+    <label>
+        <input type="radio" name="Status" value="false" /> Inativos
+    </label>
+    <label>
+        <input type="radio" name="Status" value="true" /> Ativos
+    </label>
+
+    <button class="btn btn-primary" type="submit">Filtrar</button>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Login)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Login)
+            </td>
+            <td>
+                @{
+                    string status = "Ativo";
+                    if (!item.Status)
+                        status = "Inativo";
+
+                        @status
+                }
+            </td>
+            <td>
+                <a asp-action="Update" asp-route-id="@item.Id">Editar</a> 
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
